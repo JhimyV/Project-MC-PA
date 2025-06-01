@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+</head>
+<body>
+    <h1>Clientes Registrados</h1>
+    <a href="/clientes/nuevo">Registrar nuevo cliente</a>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>DNI</th>
+        </tr>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente[0] }}</td>
+            <td>{{ cliente[1] }}</td>
+            <td>{{ cliente[2] }}</td>
+            <td>{{ cliente[3] }}</td>
+            <td>{{ cliente[4] }}</td>
+        </tr>
+            <th>Acciones</th>
+            <td>
+                <a href="/clientes/editar/{{ cliente[0] }}">Editar</a> |
+                <a href="/clientes/eliminar/{{ cliente[0] }}" onclick="return confirm('¿Eliminar cliente?')">Eliminar</a>
+            </td>
+
+        {% endfor %}
+    </table>
+    <a href="/dashboard">Volver</a>
+</body>
+</html>

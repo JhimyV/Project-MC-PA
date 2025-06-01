@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Habitaciones</title>
+</head>
+<body>
+    <h1>Habitaciones</h1>
+    <a href="/habitaciones/nueva">Registrar nueva habitación</a>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Número</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Estado</th>
+        </tr>
+        {% for h in habitaciones %}
+        <tr>
+            <td>{{ h[0] }}</td>
+            <td>{{ h[1] }}</td>
+            <td>{{ h[2] }}</td>
+            <td>{{ h[3] }}</td>
+            <td>{{ h[4] }}</td>
+        </tr>
+        
+        <th>Acciones</th>
+        
+        <td>
+            <a href="/habitaciones/editar/{{ h[0] }}">Editar</a> |
+            <a href="/habitaciones/eliminar/{{ h[0] }}" onclick="return confirm('¿Eliminar habitación?')">Eliminar</a>
+        </td>
+        {% endfor %}
+    </table>
+    <a href="/dashboard">Volver</a>
+</body>
+</html>

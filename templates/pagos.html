@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>Pagos</title></head>
+<body>
+    <h1>Lista de Pagos</h1>
+    <a href="/pagos/nuevo">Registrar nuevo pago</a>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Habitación</th>
+            <th>Monto</th>
+            <th>Fecha</th>
+            <th>Método</th>
+        </tr>
+        {% for p in pagos %}
+        <tr>
+            <td>{{ p[0] }}</td>
+            <td>{{ p[1] }}</td>
+            <td>{{ p[2] }}</td>
+            <td>{{ p[3] }}</td>
+            <td>{{ p[4] }}</td>
+            <td>{{ p[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/dashboard">Volver</a>
+</body>
+</html>

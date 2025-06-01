@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>Reportes</title></head>
+<body>
+    <h1>Reportes</h1>
+
+    <h2>Habitaciones Ocupadas</h2>
+    <table border="1">
+        <tr><th>Habitación</th><th>Tipo</th><th>Inicio</th><th>Fin</th><th>Cliente</th></tr>
+        {% for h in habitaciones %}
+        <tr>
+            <td>{{ h[0] }}</td><td>{{ h[1] }}</td><td>{{ h[2] }}</td><td>{{ h[3] }}</td><td>{{ h[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Ingresos por Mes</h2>
+    <table border="1">
+        <tr><th>Mes</th><th>Total Recaudado</th></tr>
+        {% for i in ingresos %}
+        <tr>
+            <td>{{ i[0] }}</td><td>${{ i[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/dashboard">Volver al inicio</a>
+</body>
+</html>

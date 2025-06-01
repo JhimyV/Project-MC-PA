@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Cliente</title>
+</head>
+<body>
+    <h2>Registrar Cliente</h2>
+    <form method="POST" action="/clientes/guardar">
+        <input type="text" name="nombre" placeholder="Nombre" required><br>
+        <input type="email" name="email" placeholder="Correo" required><br>
+        <input type="text" name="telefono" placeholder="Teléfono" required><br>
+        <input type="text" name="dni" placeholder="DNI" required><br>
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="/clientes">Volver a clientes</a>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Bienvenido, {{ usuario }}</h1>
+    
+    <div class="panel">
+        <a href="{{ url_for('clientes') }}">👥 Clientes</a>
+        <a href="{{ url_for('habitaciones') }}">🛏️ Habitaciones</a>
+        <a href="{{ url_for('reservas') }}">📅 Reservas</a>
+        <a href="{{ url_for('pagos') }}">💵 Pagos</a>
+        <a href="{{ url_for('reportes') }}">📊 Reportes</a>
+    </div>
+
+    <div class="resumen">
+        <!-- Aquí puedes usar variables traídas desde el backend para mostrar conteos -->
+        <p>Clientes registrados: {{ total_clientes }}</p>
+        <p>Habitaciones disponibles: {{ habitaciones_disponibles }}</p>
+        <p>Reservas activas: {{ reservas_activas }}</p>
+        <p>Ingresos este mes: ${{ ingresos_mes }}</p>
+    </div>
+
+    <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+</body>
+</html>
