@@ -1,36 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head><title>Reservas</title></head>
-<body>
-    <h1>Lista de Reservas</h1>
-    <a href="/reservas/nueva">Crear nueva reserva</a>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Cliente</th>
-            <th>Habitación</th>
-            <th>Desde</th>
-            <th>Hasta</th>
-            <th>Estado</th>
-        </tr>
-        {% for r in reservas %}
-        <tr>
-            <td>{{ r[0] }}</td>
-            <td>{{ r[1] }}</td>
-            <td>{{ r[2] }}</td>
-            <td>{{ r[3] }}</td>
-            <td>{{ r[4] }}</td>
-            <td>{{ r[5] }}</td>
-        </tr>
-        
-        <th>Acciones</th>
-        <td>
-            <a href="/reservas/editar/{{ r[0] }}">Editar</a> |
-            <a href="/reservas/cancelar/{{ r[0] }}" onclick="return confirm('¿Cancelar reserva?')">Cancelar</a>
-        </td>
+{% extends 'layout.html' %}
 
-        {% endfor %}
-            </table>
-    <a href="/dashboard">Volver</a>
-</body>
-</html>
+{% block title %}Reservas{% endblock %}
+
+{% block content %}
+<h2>Lista de Reservas</h2>
+<a class="button" href="/reservas/nueva">Crear nueva reserva</a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Habitación</th>
+        <th>Desde</th>
+        <th>Hasta</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    {% for r in reservas %}
+    <tr>
+        <td>{{ r[0] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ r[4] }}</td>
+        <td>{{ r[5] }}</td>
+        <td>
+            <a class="button" href="/reservas/editar/{{ r[0] }}">Editar</a>
+            <a class="button" href="/reservas/cancelar/{{ r[0] }}" onclick="return confirm('¿Cancelar reserva?')">Cancelar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a class="button" href="/dashboard">Volver</a>
+{% endblock %}
+

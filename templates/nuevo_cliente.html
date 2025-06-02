@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Nuevo Cliente</title>
-</head>
-<body>
-    <h2>Registrar Cliente</h2>
-    <form method="POST" action="/clientes/guardar">
-        <input type="text" name="nombre" placeholder="Nombre" required><br>
-        <input type="email" name="email" placeholder="Correo" required><br>
-        <input type="text" name="telefono" placeholder="Teléfono" required><br>
-        <input type="text" name="dni" placeholder="DNI" required><br>
-        <button type="submit">Guardar</button>
-    </form>
-    <a href="/clientes">Volver a clientes</a>
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block title %}Nuevo Cliente{% endblock %}
+
+{% block content %}
+<h2>Registrar Cliente</h2>
+<form method="POST" action="/clientes/guardar">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required><br><br>
+
+    <label for="email">Correo:</label><br>
+    <input type="email" id="email" name="email" placeholder="Correo" required><br><br>
+
+    <label for="telefono">Teléfono:</label><br>
+    <input type="text" id="telefono" name="telefono" placeholder="Teléfono" required><br><br>
+
+    <label for="dni">DNI:</label><br>
+    <input type="text" id="dni" name="dni" placeholder="DNI" required><br><br>
+
+    <button class="button" type="submit">Guardar</button>
+</form>
+<a class="button" href="/clientes">Volver a clientes</a>
+{% endblock %}

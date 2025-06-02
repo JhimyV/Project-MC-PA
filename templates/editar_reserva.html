@@ -1,37 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head><title>Editar Reserva</title></head>
-<body>
-    <h2>Editar Reserva</h2>
-    <form method="POST" action="/reservas/actualizar/{{ reserva[0] }}">
-        <label>Cliente:</label>
-        <select name="cliente_id">
-            {% for c in clientes %}
-            <option value="{{ c[0] }}" {% if c[0] == reserva[1] %}selected{% endif %}>{{ c[1] }}</option>
-            {% endfor %}
-        </select><br>
+{% extends 'layout.html' %}
 
-        <label>Habitación:</label>
-        <select name="habitacion_id">
-            {% for h in habitaciones %}
-            <option value="{{ h[0] }}" {% if h[0] == reserva[2] %}selected{% endif %}>Habitación {{ h[1] }}</option>
-            {% endfor %}
-        </select><br>
+{% block title %}Editar Reserva{% endblock %}
 
-        <label>Fecha Inicio:</label>
-        <input type="date" name="fecha_inicio" value="{{ reserva[3] }}"><br>
+{% block content %}
+<h2>Editar Reserva</h2>
+<form method="POST" action="/reservas/actualizar/{{ reserva[0] }}">
+    <label for="cliente_id">Cliente:</label><br>
+    <select id="cliente_id" name="cliente_id">
+        {% for c in clientes %}
+        <option value="{{ c[0] }}" {% if c[0] == reserva[1] %}selected{% endif %}>{{ c[1] }}</option>
+        {% endfor %}
+    </select><br><br>
 
-        <label>Fecha Fin:</label>
-        <input type="date" name="fecha_fin" value="{{ reserva[4] }}"><br>
+    <label for="habitacion_id">Habitación:</label><br>
+    <select id="habitacion_id" name="habitacion_id">
+        {% for h in habitaciones %}
+        <option value="{{ h[0] }}" {% if h[0] == reserva[2] %}selected{% endif %}>Habitación {{ h[1] }}</option>
+        {% endfor %}
+    </select><br><br>
 
-        <label>Estado:</label>
-        <select name="estado">
-            <option value="Activa" {% if reserva[5] == 'Activa' %}selected{% endif %}>Activa</option>
-            <option value="Cancelada" {% if reserva[5] == 'Cancelada' %}selected{% endif %}>Cancelada</option>
-        </select><br>
+    <label for="fecha_inicio">Fecha Inicio:</label><br>
+    <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ reserva[3] }}"><br><br>
 
-        <button type="submit">Actualizar</button>
-    </form>
-    <a href="/reservas">Volver</a>
-</body>
-</html>
+    <label for="fecha_fin">Fecha Fin:</label><br>
+    <input type="date" id="fecha_fin" name="fecha_fin" value="{{ reserva[4] }}"><br><br>
+
+    <label for="estado">Estado:</label><br>
+    <select id="estado" name="estado">
+        <option value="Activa" {% if reserva[5] == 'Activa' %}selected{% endif %}>Activa</option>
+        <option value="Cancelada" {% if reserva[5] == 'Cancelada' %}selected{% endif %}>Cancelada</option>
+    </select><br><br>
+
+    <button class="button" type="submit">Actualizar</button>
+</form>
+<a class="button" href="/reservas">Volver</a>
+{% endblock %}
