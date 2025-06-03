@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>Editar Cliente</h2>
-<form method="POST" action="/clientes/editar/{{ cliente[0] }}">
+<form method="POST" action="/clientes/actualizar/{{ cliente[0] }}">
     <label for="nombre">Nombre:</label><br>
     <input type="text" id="nombre" name="nombre" value="{{ cliente[1] }}" required><br><br>
 
