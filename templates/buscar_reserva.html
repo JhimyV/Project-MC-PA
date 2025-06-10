@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head><title>Buscar Reservas</title></head>
+
+<head>
+    <title>Buscar Reservas</title>
+</head>
+
 <body>
     <h1>Buscar Reservas</h1>
     <form method="POST">
@@ -17,10 +21,22 @@
     {% if resultados %}
     <h2>Resultados:</h2>
     <table border="1">
-        <tr><th>ID</th><th>Cliente</th><th>Habitación</th><th>Inicio</th><th>Fin</th><th>Estado</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Habitación</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Estado</th>
+        </tr>
         {% for r in resultados %}
         <tr>
-            <td>{{ r[0] }}</td><td>{{ r[1] }}</td><td>{{ r[2] }}</td><td>{{ r[3] }}</td><td>{{ r[4] }}</td><td>{{ r[5] }}</td>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+            <td>{{ r[5] }}</td>
         </tr>
         {% endfor %}
     </table>
@@ -28,4 +44,5 @@
 
     <a href="/dashboard">Volver</a>
 </body>
+
 </html>

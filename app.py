@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from werkzeug.security import generate_password_hash
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-app.secret_key = 'clave_secreta'  # Necesaria para sesiones
+app.secret_key = 'clave_secreta'  
 
 # Configuración de conexión a MySQL
 app.config['MYSQL_HOST'] = 'localhost'
@@ -15,6 +16,7 @@ mysql = MySQL(app)
 @app.route('/')
 def home():
     return render_template('login.html')
+#----------------------login-------------------------------------------
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -27,11 +29,13 @@ def login():
     cur.close()
 
     if user:
-        session['usuario'] = user[1]  # nombre_usuario
+        session['usuario'] = user[1]
+        session['rol'] = user[3]
         return redirect(url_for('dashboard'))
     else:
         flash('Credenciales incorrectas', 'error')
         return redirect(url_for('home'))
+
 
 #----------------------dashboard--------------------------------------------
 
@@ -40,22 +44,26 @@ def dashboard():
     if 'usuario' not in session:
         return redirect('/')
 
-    cur = mysql.connection.cursor()
+    if session['rol'] == 'usuario':
+        return render_template('dashboard_usuario.html') 
+    elif session['rol'] == 'admin':
+
+        cur = mysql.connection.cursor()
 
 
-    # Total de clientes
+
     cur.execute("SELECT COUNT(*) FROM clientes")
     total_clientes = cur.fetchone()[0]
 
-    # Habitaciones disponibles
+
     cur.execute("SELECT COUNT(*) FROM habitaciones WHERE estado = 'Disponible'")
     habitaciones_disponibles = cur.fetchone()[0]
 
-    # Reservas activas
+
     cur.execute("SELECT COUNT(*) FROM reservas WHERE estado = 'Activa'")
     reservas_activas = cur.fetchone()[0]
 
-    # Ingresos del mes actual
+
     cur.execute("""
         SELECT IFNULL(SUM(monto), 0) FROM pagos
         WHERE MONTH(fecha_pago) = MONTH(CURDATE()) AND YEAR(fecha_pago) = YEAR(CURDATE())
@@ -83,7 +91,8 @@ def logout():
 
 @app.route('/clientes')
 def clientes():
-    if 'usuario' in session:
+    if 'usuario' in session and session.get('rol') == 'admin':
+
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM clientes")
         clientes = cur.fetchall()
@@ -150,7 +159,8 @@ def actualizar_cliente(id):
 
 @app.route('/clientes/eliminar/<int:id>')
 def eliminar_cliente(id):
-    if 'usuario' in session:
+    if 'usuario' in session and session.get('rol') == 'admin':
+
         cur = mysql.connection.cursor()
         cur.execute("DELETE FROM clientes WHERE id_cliente = %s", (id,))
         mysql.connection.commit()
@@ -228,7 +238,8 @@ def actualizar_habitacion(id):
 
 @app.route('/habitaciones/eliminar/<int:id>')
 def eliminar_habitacion(id):
-    if 'usuario' in session:
+    if 'usuario' in session and session.get('rol') == 'admin':
+
         cur = mysql.connection.cursor()
         cur.execute("DELETE FROM habitaciones WHERE id_habitacion = %s", (id,))
         mysql.connection.commit()
@@ -388,7 +399,8 @@ def guardar_pago():
 #-------------------reportes------------------------------------
 @app.route('/reportes')
 def reportes():
-    if 'usuario' in session:
+    if 'usuario' in session and session.get('rol') == 'admin':
+        
         cur = mysql.connection.cursor()
 
         # Reporte 1: Habitaciones ocupadas actualmente
@@ -455,7 +467,38 @@ def buscar_reservas():
     else:
         return redirect(url_for('home'))
 
+#----------------------------------------------------------------------
 
+@app.route('/habitaciones/disponibles')
+def ver_habitaciones():
+    if 'usuario' in session and session['rol'] == 'usuario':
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM habitaciones WHERE estado = 'Disponible'")
+        habitaciones = cur.fetchall()
+        cur.close()
+        return render_template('habitaciones_disponibles.html', habitaciones=habitaciones)
+    return redirect(url_for('dashboard'))
+
+#---------------------------registro-----------------------------------
+@app.route('/registro', methods=['GET', 'POST'])
+def registro():
+    if request.method == 'POST':
+        usuario = request.form['usuario']
+        password = request.form['password']
+        rol = request.form['rol']
+
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO usuarios (nombre_usuario, password, rol) VALUES (%s, %s, %s)", 
+                    (usuario, password, rol))
+        mysql.connection.commit()
+        cur.close()
+
+        session['usuario'] = usuario
+        session['rol'] = 'admin'
+
+        return redirect(url_for('dashboard'))
+
+    return render_template('registro.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

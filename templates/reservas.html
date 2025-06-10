@@ -25,11 +25,11 @@
         <td>{{ r[5] }}</td>
         <td>
             <a class="button" href="/reservas/editar/{{ r[0] }}">Editar</a>
-            <a class="button" href="/reservas/cancelar/{{ r[0] }}" onclick="return confirm('¿Cancelar reserva?')">Cancelar</a>
+            <a class="button" href="/reservas/cancelar/{{ r[0] }}"
+                onclick="return confirm('¿Cancelar reserva?')">Cancelar</a>
         </td>
     </tr>
     {% endfor %}
 </table>
 <a class="button" href="/dashboard">Volver</a>
 {% endblock %}
-

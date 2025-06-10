@@ -5,7 +5,7 @@
 {% block content %}
 <h2 class="section-title">Lista de <span class="highlight">Habitaciones</span></h2>
 
-<a class="button" href="/habitaciones/nueva" >Registrar nueva habitación</a>
+<a class="button" href="/habitaciones/nueva">Registrar nueva habitación</a>
 
 <table>
     <thead>
@@ -27,8 +27,9 @@
             <td>{{ habitacion[3] }}</td>
             <td>{{ habitacion[4] }}</td>
             <td>
-                <a class="button" href="/habitaciones/editar/{{ habitacion[0] }}" >Editar</a>
-                <a class="button" href="/habitaciones/eliminar/{{ habitacion[0] }}"  onclick="return confirm('¿Eliminar habitación?')">Eliminar</a>
+                <a class="button" href="/habitaciones/editar/{{ habitacion[0] }}">Editar</a>
+                <a class="button" href="/habitaciones/eliminar/{{ habitacion[0] }}"
+                    onclick="return confirm('¿Eliminar habitación?')">Eliminar</a>
             </td>
         </tr>
         {% endfor %}
@@ -37,4 +38,3 @@
 
 <a class="button" href="/dashboard">Volver</a>
 {% endblock %}
-

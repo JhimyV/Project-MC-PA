@@ -8,14 +8,14 @@
     <label for="cliente_id">Cliente:</label><br>
     <select id="cliente_id" name="cliente_id">
         {% for c in clientes %}
-        <option value="{{ c[0] }}" {% if c[0] == reserva[1] %}selected{% endif %}>{{ c[1] }}</option>
+        <option value="{{ c[0] }}" {% if c[0]==reserva[1] %}selected{% endif %}>{{ c[1] }}</option>
         {% endfor %}
     </select><br><br>
 
     <label for="habitacion_id">Habitación:</label><br>
     <select id="habitacion_id" name="habitacion_id">
         {% for h in habitaciones %}
-        <option value="{{ h[0] }}" {% if h[0] == reserva[2] %}selected{% endif %}>Habitación {{ h[1] }}</option>
+        <option value="{{ h[0] }}" {% if h[0]==reserva[2] %}selected{% endif %}>Habitación {{ h[1] }}</option>
         {% endfor %}
     </select><br><br>
 
@@ -27,8 +27,8 @@
 
     <label for="estado">Estado:</label><br>
     <select id="estado" name="estado">
-        <option value="Activa" {% if reserva[5] == 'Activa' %}selected{% endif %}>Activa</option>
-        <option value="Cancelada" {% if reserva[5] == 'Cancelada' %}selected{% endif %}>Cancelada</option>
+        <option value="Activa" {% if reserva[5]=='Activa' %}selected{% endif %}>Activa</option>
+        <option value="Cancelada" {% if reserva[5]=='Cancelada' %}selected{% endif %}>Cancelada</option>
     </select><br><br>
 
     <button class="button" type="submit">Actualizar</button>

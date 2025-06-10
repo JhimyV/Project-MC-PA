@@ -16,9 +16,9 @@
 
     <label for="estado">Estado:</label><br>
     <select id="estado" name="estado">
-        <option value="Disponible" {% if habitacion[4] == 'Disponible' %}selected{% endif %}>Disponible</option>
-        <option value="Ocupada" {% if habitacion[4] == 'Ocupada' %}selected{% endif %}>Ocupada</option>
-        <option value="Mantenimiento" {% if habitacion[4] == 'Mantenimiento' %}selected{% endif %}>Mantenimiento</option>
+        <option value="Disponible" {% if habitacion[4]=='Disponible' %}selected{% endif %}>Disponible</option>
+        <option value="Ocupada" {% if habitacion[4]=='Ocupada' %}selected{% endif %}>Ocupada</option>
+        <option value="Mantenimiento" {% if habitacion[4]=='Mantenimiento' %}selected{% endif %}>Mantenimiento</option>
     </select><br><br>
 
     <button class="button" type="submit">Actualizar</button>

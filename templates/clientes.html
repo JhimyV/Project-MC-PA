@@ -23,7 +23,8 @@
         <td>{{ cliente[4] }}</td>
         <td>
             <a class="button" href="/clientes/editar/{{ cliente[0] }}">Editar</a>
-            <a class="button" href="/clientes/eliminar/{{ cliente[0] }}" onclick="return confirm('¿Eliminar cliente?')">Eliminar</a>
+            <a class="button" href="/clientes/eliminar/{{ cliente[0] }}"
+                onclick="return confirm('¿Eliminar cliente?')">Eliminar</a>
         </td>
     </tr>
     {% endfor %}
